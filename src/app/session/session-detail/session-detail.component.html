@@ -1,0 +1,10 @@
+<div class="flex flex-col justify-center z-0">
+  <div>
+    <p class="text-3xl text-center font-extrabold text-gray-700">Lunch Initiated by {{initiator}}</p>
+  </div>
+  <div class="items-center text-center w-full ">
+    <app-suggestion *ngFor="let suggestion of suggestions" [suggestion]="suggestion" ></app-suggestion>
+  </div>
+</div>
+
+<app-suggestion-add></app-suggestion-add>

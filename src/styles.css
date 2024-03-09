@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    @apply border-red-400 border-2
+  }
+
+}
