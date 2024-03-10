@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Suggestion } from '../../shared/model/suggestion.model';
+import { WebsocketService } from '../../shared/service/websocket.service';
 
 @Component({
   selector: 'app-session-detail',
-  templateUrl: './session-detail.component.html',
-  styleUrl: './session-detail.component.css',
+  templateUrl: './lunch-plan-detail.component.html',
+  styleUrl: './lunch-plan-detail.component.css',
 })
-export class SessionDetailComponent {
+export class LunchPlanDetailComponent implements OnInit {
   initiator: string = 'Kelvin';
   suggestions: Suggestion[] = [
     new Suggestion(
@@ -30,4 +31,9 @@ export class SessionDetailComponent {
       'A filipino fast food etc',
     ),
   ];
+
+  constructor(private websockService: WebsocketService) {}
+  ngOnInit(): void {
+    this.websockService.connect();
+  }
 }

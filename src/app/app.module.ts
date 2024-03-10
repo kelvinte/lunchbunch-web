@@ -8,17 +8,19 @@ import { HeaderComponent } from './header/header.component';
 import { LogoComponent } from './shared/component/logo/logo.component';
 import { LandingComponent } from './landing/landing.component';
 import { FooterComponent } from './footer/footer.component';
-import { CreateSessionComponent } from './session/create-session/create-session.component';
-import { JoinSessionComponent } from './session/join-session/join-session.component';
-import { SessionDetailComponent } from './session/session-detail/session-detail.component';
-import { SuggestionAddComponent } from './session/session-detail/suggestion-add/suggestion-add.component';
-import { SuggestionComponent } from './session/session-detail/suggestion/suggestion.component';
-import { FormsModule } from '@angular/forms';
+import { CreateLunchPlanComponent } from './lunch-plan/create-lunch-plan/create-lunch-plan.component';
+import { JoinLunchPlanComponent } from './lunch-plan/join-lunch-plan/join-lunch-plan.component';
+import { LunchPlanDetailComponent } from './lunch-plan/lunch-plan-detail/lunch-plan-detail.component';
+import { SuggestionAddComponent } from './lunch-plan/lunch-plan-detail/suggestion-add/suggestion-add.component';
+import { SuggestionComponent } from './lunch-plan/lunch-plan-detail/suggestion/suggestion.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './shared/component/loading/loading.component';
 import { ErrorAlertComponent } from './shared/component/error-alert/error-alert.component';
 import { SuccessAlertComponent } from './shared/component/success-alert/success-alert.component';
+import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
+import { CreateLunchPlanSuccessComponent } from './lunch-plan/create-lunch-plan-success/create-lunch-plan-success.component';
 
 @NgModule({
   declarations: [
@@ -30,16 +32,25 @@ import { SuccessAlertComponent } from './shared/component/success-alert/success-
     SuggestionAddComponent,
     LandingComponent,
     FooterComponent,
-    CreateSessionComponent,
-    JoinSessionComponent,
-    SessionDetailComponent,
+    CreateLunchPlanComponent,
+    JoinLunchPlanComponent,
+    LunchPlanDetailComponent,
     AuthComponent,
     LoadingComponent,
     ErrorAlertComponent,
     SuccessAlertComponent,
+    CreateLunchPlanSuccessComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

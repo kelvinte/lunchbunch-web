@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SessionDetailComponent } from './session-detail.component';
+import { LunchPlanDetailComponent } from './lunch-plan-detail.component';
 
 describe('SessionDetailComponent', () => {
-  let component: SessionDetailComponent;
-  let fixture: ComponentFixture<SessionDetailComponent>;
+  let component: LunchPlanDetailComponent;
+  let fixture: ComponentFixture<LunchPlanDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SessionDetailComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(SessionDetailComponent);
+      declarations: [LunchPlanDetailComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(LunchPlanDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

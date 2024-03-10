@@ -21,6 +21,8 @@ export class AuthComponent {
   ) {}
   toggleAuthMode() {
     this.isLoginMode = !this.isLoginMode;
+    this.error = null;
+    this.successMessage = null;
   }
 
   onSubmit() {
@@ -48,6 +50,7 @@ export class AuthComponent {
           this.successMessage =
             'You have successfully registered, please proceed to login';
           this.isLoginMode = true;
+          this.error = null;
           this.authForm.resetForm();
         }
       },

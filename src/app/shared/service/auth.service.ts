@@ -52,7 +52,7 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         map((data: ApiResponse<any>) => {
-          return 'okay';
+          return 'Success';
         }),
       );
   }
@@ -66,7 +66,7 @@ export class AuthService {
     expirationDuration = expirationDuration - 30_000;
     this.autoLogoutTimeout = setTimeout(() => {
       this.logout();
-    }, expirationDuration * 1000);
+    }, expirationDuration);
   }
 
   autoLogin() {
@@ -104,6 +104,8 @@ export class AuthService {
     }
     if (errorRes.error.title.includes('AUTH002')) {
       errorMessage = 'The email has already been registered';
+    } else if (errorRes.error.title) {
+      errorMessage = errorRes.error.title;
     }
     return throwError(() => errorMessage);
   }

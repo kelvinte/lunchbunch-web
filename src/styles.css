@@ -3,9 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
+@layer components {
   input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
-    @apply border-red-400 border-2
+    @apply border-red-400 border-2;
   }
-
+  button.disabled{
+    @apply bg-gray-300 text-gray-800;
+  }
+  .button-primary{
+    @apply bg-blue-500 hover:bg-blue-700;
+  }
 }
