@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Suggestion } from '../../shared/model/suggestion.model';
 import { WebsocketService } from '../../shared/service/websocket.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-session-detail',
@@ -8,6 +9,7 @@ import { WebsocketService } from '../../shared/service/websocket.service';
   styleUrl: './lunch-plan-detail.component.css',
 })
 export class LunchPlanDetailComponent implements OnInit {
+  lunchPlanUuid: string;
   initiator: string = 'Kelvin';
   suggestions: Suggestion[] = [
     new Suggestion(
@@ -32,8 +34,14 @@ export class LunchPlanDetailComponent implements OnInit {
     ),
   ];
 
-  constructor(private websockService: WebsocketService) {}
+  constructor(
+    private websockService: WebsocketService,
+    private route: ActivatedRoute,
+  ) {}
   ngOnInit(): void {
-    this.websockService.connect();
+    this.route.params.subscribe((params) => {
+      this.lunchPlanUuid = params['uuid'];
+      this.websockService.connect(this.lunchPlanUuid);
+    });
   }
 }
