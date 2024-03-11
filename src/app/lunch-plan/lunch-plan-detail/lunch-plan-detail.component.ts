@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Suggestion } from '../../shared/model/suggestion.model';
-import { WebsocketService } from '../../shared/service/websocket.service';
 import { ActivatedRoute } from '@angular/router';
+import { SuggestionService } from '../../shared/service/suggestion.service';
 
 @Component({
   selector: 'app-session-detail',
@@ -10,38 +10,30 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LunchPlanDetailComponent implements OnInit {
   lunchPlanUuid: string;
+  connected: boolean;
+
   initiator: string = 'Kelvin';
-  suggestions: Suggestion[] = [
-    new Suggestion(
-      'Jollibee',
-      'https://ucarecdn.com/a7c29c6d-f230-4755-b047-80ea5a2b8dd7/-/crop/547x544/111,76/-/format/auto/-/resize/240x/',
-      'A filipino fast food etc',
-    ),
-    new Suggestion(
-      'Jollibee',
-      'https://ucarecdn.com/a7c29c6d-f230-4755-b047-80ea5a2b8dd7/-/crop/547x544/111,76/-/format/auto/-/resize/240x/',
-      'A filipino fast food etc',
-    ),
-    new Suggestion(
-      'Jollibee',
-      'https://ucarecdn.com/a7c29c6d-f230-4755-b047-80ea5a2b8dd7/-/crop/547x544/111,76/-/format/auto/-/resize/240x/',
-      'A filipino fast food etc',
-    ),
-    new Suggestion(
-      'Jollibee',
-      'https://ucarecdn.com/a7c29c6d-f230-4755-b047-80ea5a2b8dd7/-/crop/547x544/111,76/-/format/auto/-/resize/240x/',
-      'A filipino fast food etc',
-    ),
-  ];
+  suggestions: Suggestion[];
 
   constructor(
-    private websockService: WebsocketService,
-    private route: ActivatedRoute,
+    private suggestionService: SuggestionService,
+    private route: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.lunchPlanUuid = params['uuid'];
-      this.websockService.connect(this.lunchPlanUuid);
+
+      this.suggestionService.suggestionsEmitter.subscribe((suggestions) => {
+        this.suggestions = suggestions;
+      });
+
+      this.suggestionService.isConnected.subscribe((isConnected) => {
+        this.connected = isConnected;
+        this.suggestionService.retrieve();
+      });
+
+      this.suggestionService.connect(this.lunchPlanUuid);
     });
   }
 }
