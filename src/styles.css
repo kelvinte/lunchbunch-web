@@ -12,6 +12,9 @@
     @apply bg-gray-300 text-gray-800;
   }
   .button-primary {
-    @apply bg-blue-500 hover:bg-blue-700;
+    @apply bg-blue-500 hover:bg-blue-700  text-white;
+  }
+  .button-danger {
+    @apply bg-red-500 hover:bg-red-700  text-white;
   }
 }

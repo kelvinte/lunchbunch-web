@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Suggestion } from '../../shared/model/suggestion.model';
 import { ActivatedRoute } from '@angular/router';
 import { SuggestionService } from '../../shared/service/suggestion.service';
+import { LunchPlanService } from '../../shared/service/lunch-plan.service';
+import { ApiResponse } from '../../shared/model/api-response.model';
 
 @Component({
   selector: 'app-session-detail',
@@ -10,12 +12,19 @@ import { SuggestionService } from '../../shared/service/suggestion.service';
 })
 export class LunchPlanDetailComponent implements OnInit {
   lunchPlanUuid: string;
-  connected: boolean;
+  initiator: string;
+  date: string;
+  description: string;
 
-  initiator: string = 'Kelvin';
+  connected: boolean;
+  isOwner: boolean;
+
   suggestions: Suggestion[];
 
+  error = null;
+
   constructor(
+    private lunchplanService: LunchPlanService,
     private suggestionService: SuggestionService,
     private route: ActivatedRoute
   ) {}
@@ -24,16 +33,31 @@ export class LunchPlanDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.lunchPlanUuid = params['uuid'];
 
+      this.lunchplanService.getLunchPlan(this.lunchPlanUuid).subscribe({
+        next: (lunchPlan) => {
+          this.description = lunchPlan.description;
+          this.date = lunchPlan.date;
+          this.initiator = lunchPlan.initiator;
+          this.isOwner = lunchPlan.owner;
+        },
+        error: (error) => {
+          this.error = error;
+        },
+      });
+
       this.suggestionService.suggestionsEmitter.subscribe((suggestions) => {
         this.suggestions = suggestions;
       });
 
       this.suggestionService.isConnected.subscribe((isConnected) => {
         this.connected = isConnected;
-        this.suggestionService.retrieve();
       });
 
       this.suggestionService.connect(this.lunchPlanUuid);
     });
+  }
+
+  endSession() {
+    console.log('sending end');
   }
 }
