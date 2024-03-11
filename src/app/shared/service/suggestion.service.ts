@@ -11,7 +11,7 @@ import { SuggestionWinner } from '../model/suggestion-winner.model';
   providedIn: 'root',
 })
 export class SuggestionService {
-  private socket: WebSocket;
+  socket: WebSocket;
 
   isConnected = new BehaviorSubject<boolean>(false);
 
