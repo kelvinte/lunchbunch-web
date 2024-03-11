@@ -5,6 +5,7 @@ import { BehaviorSubject, exhaustMap, take, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { WebsockModel } from '../model/websock.model';
 import { Suggestion } from '../model/suggestion.model';
+import { SuggestionWinner } from '../model/suggestion-winner.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +17,13 @@ export class SuggestionService {
 
   suggestions: Suggestion[];
   suggestionsEmitter = new EventEmitter<Suggestion[]>();
+  winnerEmitter = new EventEmitter<SuggestionWinner>();
 
   constructor(private authService: AuthService) {}
 
   connect(lunchPlanUuid) {
     this.socket = new WebSocket(
-      AppSettings.LUNCH_PLAN_WS_ENDPOINT + '?suggest=' + lunchPlanUuid
+      AppSettings.LUNCH_PLAN_WS_ENDPOINT + '?suggest=' + lunchPlanUuid,
     );
 
     this.socket.onerror = (error) => {
@@ -52,6 +54,11 @@ export class SuggestionService {
         this.suggestions.push(resp.data);
         this.suggestionsEmitter.emit(this.suggestions.slice());
       }
+
+      if (resp.action == 'END_SUGGESTION') {
+        var winner = <SuggestionWinner>resp.data;
+        this.winnerEmitter.emit(winner);
+      }
     };
   }
 
@@ -63,7 +70,21 @@ export class SuggestionService {
     }
   }
 
+  endSession() {
+    if (this.socket) {
+      const websockMsg = new WebsockModel('END_SUGGESTION', {});
+
+      this.socket.send(JSON.stringify(websockMsg));
+    }
+  }
+
+  destorySocket() {
+    this.socket.close();
+  }
   retrieve() {
+    /**
+     * NOT BEING USED since we are using API to fetch the initial list
+     */
     if (this.socket) {
       const websockMsg = new WebsockModel('RETRIEVE_SUGGESTIONS', {});
       this.socket.send(JSON.stringify(websockMsg));

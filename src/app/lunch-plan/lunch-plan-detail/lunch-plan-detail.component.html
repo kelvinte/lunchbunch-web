@@ -1,23 +1,29 @@
+<app-suggestion-winner *ngIf="winner" [winner]="winner"></app-suggestion-winner>
+
 <app-error-alert *ngIf="error">
   {{error}}
 </app-error-alert>
 <div *ngIf="error">
   <button routerLink="../join"
-    class="mt-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    class="mt-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
     Go Back
   </button>
 </div>
-<div class="flex flex-col justify-center z-0" *ngIf="!error">
+<div class="pt-10 flex flex-col justify-center z-0" *ngIf="!error">
   <div>
     <p class="text-3xl text-center font-extrabold text-gray-700">{{description}} </p>
     <p class="text-sm text-center">by: {{initiator}}</p>
     <p class="text-sm text-center">held on: {{date | date}}</p>
+  </div>
+
+  <div class="h-96 align-middle" *ngIf="!(suggestions &&  suggestions.length>0)">
+    <p class="text-3xl text-center  ">No one has entered a suggestion yet</p>
   </div>
   <div class="items-center text-center w-full ">
     <app-suggestion *ngFor="let suggestion of suggestions" [suggestion]="suggestion"></app-suggestion>
   </div>
 </div>
 
-<app-suggestion-add *ngIf="!error" [isConnected]="connected" [isOwner]="isOwner"
+<app-suggestion-add *ngIf="!error && !winner" [isConnected]="connected" [isOwner]="isOwner"
   [endSuggestionDisabled]="!(suggestions &&  suggestions.length>0)"
   (onEndSessionClicked)="endSession()"></app-suggestion-add>

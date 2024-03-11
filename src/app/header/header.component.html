@@ -8,9 +8,9 @@
         </a>
       </div>
       <div class="flex space-x-2">
-        <button *ngIf="!isAuthenticated" routerLink="/auth" class="bg-blue-600 text-white p-3 rounded-md m-2 shadow-xl hover:bg-blue-500 transition duration-300">Register</button>
-        <button *ngIf="isAuthenticated" routerLink="/session/create" class="bg-blue-600 text-white p-3 rounded-md m-2 shadow-xl hover:bg-blue-500 transition duration-300">Create Lunch Plan</button>
-        <button *ngIf="isAuthenticated" (click)="logout()" class="bg-red-500 text-white p-3 rounded-md m-2 shadow-xl hover:bg-blue-500 transition duration-300">Logout</button>
+        <button *ngIf="!isAuthenticated" routerLink="/auth" class="button-primary">Register</button>
+        <button *ngIf="isAuthenticated" routerLink="/session/create" class="button-primary">Create Lunch Plan</button>
+        <button *ngIf="isAuthenticated" (click)="logout()" class="button-danger">Logout</button>
       </div>
     </div>
   </div>

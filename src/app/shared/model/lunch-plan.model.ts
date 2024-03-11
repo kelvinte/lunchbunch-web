@@ -1,4 +1,5 @@
 import { Suggestion } from './suggestion.model';
+import { SuggestionWinner } from './suggestion-winner.model';
 
 export class LunchPlan {
   constructor(
@@ -8,7 +9,8 @@ export class LunchPlan {
     public description: string,
     public initiator: string,
     public owner: boolean,
+    public winner: SuggestionWinner,
 
-    public suggestions: Suggestion[]
+    public suggestions: Suggestion[],
   ) {}
 }

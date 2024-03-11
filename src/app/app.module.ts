@@ -21,6 +21,7 @@ import { ErrorAlertComponent } from './shared/component/error-alert/error-alert.
 import { SuccessAlertComponent } from './shared/component/success-alert/success-alert.component';
 import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
 import { CreateLunchPlanSuccessComponent } from './lunch-plan/create-lunch-plan-success/create-lunch-plan-success.component';
+import { SuggestionWinnerComponent } from './lunch-plan/lunch-plan-detail/suggestion-winner/suggestion-winner.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CreateLunchPlanSuccessComponent } from './lunch-plan/create-lunch-plan-
     ErrorAlertComponent,
     SuccessAlertComponent,
     CreateLunchPlanSuccessComponent,
+    SuggestionWinnerComponent,
   ],
   imports: [
     BrowserModule,

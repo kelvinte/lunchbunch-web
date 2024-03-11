@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Suggestion } from '../../shared/model/suggestion.model';
 import { ActivatedRoute } from '@angular/router';
 import { SuggestionService } from '../../shared/service/suggestion.service';
 import { LunchPlanService } from '../../shared/service/lunch-plan.service';
 import { ApiResponse } from '../../shared/model/api-response.model';
+import { SuggestionWinner } from '../../shared/model/suggestion-winner.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-session-detail',
   templateUrl: './lunch-plan-detail.component.html',
   styleUrl: './lunch-plan-detail.component.css',
 })
-export class LunchPlanDetailComponent implements OnInit {
+export class LunchPlanDetailComponent implements OnInit, OnDestroy {
   lunchPlanUuid: string;
   initiator: string;
   date: string;
@@ -20,13 +22,16 @@ export class LunchPlanDetailComponent implements OnInit {
   isOwner: boolean;
 
   suggestions: Suggestion[];
-
+  winner: SuggestionWinner;
   error = null;
 
+  suggestionSubscription: Subscription;
+  connectedSubscription: Subscription;
+  winnerSubscription: Subscription;
   constructor(
     private lunchplanService: LunchPlanService,
     private suggestionService: SuggestionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -39,25 +44,42 @@ export class LunchPlanDetailComponent implements OnInit {
           this.date = lunchPlan.date;
           this.initiator = lunchPlan.initiator;
           this.isOwner = lunchPlan.owner;
+          this.winner = lunchPlan.winner;
         },
         error: (error) => {
           this.error = error;
         },
       });
 
-      this.suggestionService.suggestionsEmitter.subscribe((suggestions) => {
-        this.suggestions = suggestions;
-      });
+      this.suggestionSubscription =
+        this.suggestionService.suggestionsEmitter.subscribe((suggestions) => {
+          this.suggestions = suggestions;
+        });
 
-      this.suggestionService.isConnected.subscribe((isConnected) => {
-        this.connected = isConnected;
-      });
+      this.connectedSubscription = this.suggestionService.isConnected.subscribe(
+        (isConnected) => {
+          this.connected = isConnected;
+        },
+      );
+
+      this.winnerSubscription = this.suggestionService.winnerEmitter.subscribe(
+        (winner) => {
+          this.winner = winner;
+        },
+      );
 
       this.suggestionService.connect(this.lunchPlanUuid);
     });
   }
 
+  ngOnDestroy() {
+    this.suggestionService.destorySocket();
+    this.winnerSubscription.unsubscribe();
+    this.connectedSubscription.unsubscribe();
+    this.suggestionSubscription.unsubscribe();
+  }
+
   endSession() {
-    console.log('sending end');
+    this.suggestionService.endSession();
   }
 }

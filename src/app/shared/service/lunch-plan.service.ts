@@ -17,7 +17,7 @@ export class LunchPlanService {
   }>(null);
   constructor(
     private http: HttpClient,
-    private suggestionService: SuggestionService
+    private suggestionService: SuggestionService,
   ) {}
 
   createLunchPlan(date: string, description: string) {
@@ -34,11 +34,11 @@ export class LunchPlanService {
               uuid: string;
               date: string;
               description: string;
-            }>
+            }>,
           ) => {
             this.lunchPlanCreated.next(data.data);
-          }
-        )
+          },
+        ),
       );
   }
 
@@ -53,9 +53,10 @@ export class LunchPlanService {
         tap((resp) => {
           const suggestions = resp.suggestions;
           this.suggestionService.setSuggestions(suggestions);
-        })
+        }),
       );
   }
+
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred';
     console.log(errorRes);

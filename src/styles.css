@@ -9,12 +9,19 @@
     @apply border-red-400 border-2;
   }
   button.disabled {
-    @apply bg-gray-300 text-gray-800;
+    @apply my-2  px-3 py-2 text-sm font-medium text-center text-gray-800 bg-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300;
   }
+
+
   .button-primary {
-    @apply bg-blue-500 hover:bg-blue-700  text-white;
+    /*@apply bg-blue-500 hover:bg-blue-700  text-white;*/
+    @apply my-2  items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300  transition duration-300;
   }
   .button-danger {
-    @apply bg-red-500 hover:bg-red-700  text-white;
+    @apply bg-red-500 text-white p-3 rounded-md m-2 shadow-xl hover:bg-red-700 transition duration-300
   }
+  .input-normal {
+    @apply mt-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5
+  }
+
 }
