@@ -7,5 +7,5 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './footer.component.css',
 })
 export class FooterComponent {
-  constructor(private route: ActivatedRoute) {}
+  constructor() {}
 }

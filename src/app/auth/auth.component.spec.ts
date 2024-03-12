@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 
-fdescribe('AuthComponent', () => {
+describe('AuthComponent', () => {
   let component: AuthComponent;
   let fixture: ComponentFixture<AuthComponent>;
   let authServiceSpyObj: any;

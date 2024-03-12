@@ -16,7 +16,6 @@ import { SuggestionComponent } from './lunch-plan/lunch-plan-detail/suggestion/s
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LoadingComponent } from './shared/component/loading/loading.component';
 import { ErrorAlertComponent } from './shared/component/error-alert/error-alert.component';
 import { SuccessAlertComponent } from './shared/component/success-alert/success-alert.component';
 import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
@@ -37,7 +36,6 @@ import { SuggestionWinnerComponent } from './lunch-plan/lunch-plan-detail/sugges
     JoinLunchPlanComponent,
     LunchPlanDetailComponent,
     AuthComponent,
-    LoadingComponent,
     ErrorAlertComponent,
     SuccessAlertComponent,
     CreateLunchPlanSuccessComponent,
