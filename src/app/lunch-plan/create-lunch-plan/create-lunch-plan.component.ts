@@ -10,15 +10,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './create-lunch-plan.component.css',
 })
 export class CreateLunchPlanComponent implements OnInit {
-  // @ViewChild('createSessionForm') createForm: NgForm;
-
   createForm: FormGroup;
   currentDate: string;
 
   constructor(
     private lunchPlanService: LunchPlanService,
     private router: Router,
-    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {

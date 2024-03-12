@@ -7,18 +7,24 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './join-lunch-plan.component.css',
 })
 export class JoinLunchPlanComponent {
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
   goToSession(linkElement) {
     const link = linkElement.value;
+    if (link == null || link == '') {
+      return;
+    }
     const httpIndex = link.indexOf('http://');
     const httpsIndex = link.indexOf('https://');
 
     let startIndex = 0;
     if (httpIndex !== -1 || httpsIndex !== -1) {
-      startIndex = link.lastIndexOf('/');
+      startIndex = link.lastIndexOf('/') + 1;
     }
 
-    const uuid = link.substring();
+    const uuid = link.substring(startIndex);
 
     this.router.navigate(['../', uuid], { relativeTo: this.route });
   }

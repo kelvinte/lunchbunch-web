@@ -9,7 +9,7 @@ import { AuthService } from '../shared/service/auth.service';
 })
 export class LandingComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  private userSub: Subscription;
+  userSub: Subscription;
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe((user) => {

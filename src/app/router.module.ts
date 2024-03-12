@@ -8,6 +8,7 @@ import { CreateLunchPlanComponent } from './lunch-plan/create-lunch-plan/create-
 import { JoinLunchPlanComponent } from './lunch-plan/join-lunch-plan/join-lunch-plan.component';
 import { AuthComponent } from './auth/auth.component';
 import { CreateLunchPlanSuccessComponent } from './lunch-plan/create-lunch-plan-success/create-lunch-plan-success.component';
+import { authGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -25,10 +26,12 @@ const routes: Routes = [
       {
         path: 'create',
         component: CreateLunchPlanComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'create-success',
         component: CreateLunchPlanSuccessComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'join',
@@ -46,7 +49,7 @@ const routes: Routes = [
     component: ErrorComponent,
     data: { message: 'Page not found' },
   },
-  // { path: '**', redirectTo: '/not-found' },
+  { path: '**', redirectTo: '/not-found' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: false })],
