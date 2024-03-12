@@ -25,6 +25,7 @@
         <div class="flex gap-3">
           <button (click)="sendSuggestion()"
                   [ngClass]="{ 'disabled':!suggestionForm.valid, 'button-primary':suggestionForm.valid,}"
+                  [disabled]="!suggestionForm.valid"
                    type="submit" [className]="isOwner ?  'w-3/4' : 'w-full'"
             class=" button-primary">
             Submit suggestion
