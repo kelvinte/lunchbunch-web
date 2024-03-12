@@ -1,6 +1,6 @@
 <app-suggestion-winner *ngIf="winner" [winner]="winner"></app-suggestion-winner>
 
-<app-error-alert *ngIf="error">
+<app-error-alert *ngIf="error" (onCloseClick)="error=null">
   {{error}}
 </app-error-alert>
 <div *ngIf="error">

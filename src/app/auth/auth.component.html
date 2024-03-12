@@ -6,7 +6,7 @@
           {{isLoginMode? 'Login' : 'Create an account'}}
         </h1>
 
-        <app-error-alert *ngIf="error">
+        <app-error-alert *ngIf="error" (onCloseClick)="error=null">
           {{error}}
         </app-error-alert>
         <app-success-alert *ngIf="successMessage">

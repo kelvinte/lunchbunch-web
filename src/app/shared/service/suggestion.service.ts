@@ -18,6 +18,7 @@ export class SuggestionService {
   suggestions: Suggestion[];
   suggestionsEmitter = new EventEmitter<Suggestion[]>();
   winnerEmitter = new EventEmitter<SuggestionWinner>();
+  errorEmitter = new EventEmitter<string>();
 
   constructor(private authService: AuthService) {}
 
@@ -58,6 +59,10 @@ export class SuggestionService {
       if (resp.action == 'END_SUGGESTION') {
         var winner = <SuggestionWinner>resp.data;
         this.winnerEmitter.emit(winner);
+      }
+
+      if (resp.action == 'ERROR') {
+        this.errorEmitter.emit(resp.data);
       }
     };
   }
