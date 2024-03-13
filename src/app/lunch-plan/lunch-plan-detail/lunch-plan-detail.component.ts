@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Suggestion } from '../../shared/model/suggestion.model';
 import { ActivatedRoute } from '@angular/router';
 import { SuggestionService } from '../../shared/service/suggestion.service';
@@ -12,7 +19,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './lunch-plan-detail.component.html',
   styleUrl: './lunch-plan-detail.component.css',
 })
-export class LunchPlanDetailComponent implements OnInit, OnDestroy {
+export class LunchPlanDetailComponent
+  implements OnInit, OnDestroy, AfterViewChecked
+{
+  @ViewChild('scrollMe') scroll: ElementRef;
   lunchPlanUuid: string;
   initiator: string;
   date: string;
@@ -31,7 +41,7 @@ export class LunchPlanDetailComponent implements OnInit, OnDestroy {
   constructor(
     private lunchplanService: LunchPlanService,
     private suggestionService: SuggestionService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -54,18 +64,20 @@ export class LunchPlanDetailComponent implements OnInit, OnDestroy {
       this.suggestionSubscription =
         this.suggestionService.suggestionsEmitter.subscribe((suggestions) => {
           this.suggestions = suggestions;
+          this.scroll.nativeElement.scrollTop =
+            this.scroll.nativeElement.scrollHeight;
         });
 
       this.connectedSubscription = this.suggestionService.isConnected.subscribe(
         (isConnected) => {
           this.connected = isConnected;
-        },
+        }
       );
 
       this.winnerSubscription = this.suggestionService.winnerEmitter.subscribe(
         (winner) => {
           this.winner = winner;
-        },
+        }
       );
 
       this.suggestionService.connect(this.lunchPlanUuid);
@@ -81,5 +93,10 @@ export class LunchPlanDetailComponent implements OnInit, OnDestroy {
 
   endSession() {
     this.suggestionService.endSession();
+  }
+
+  ngAfterViewChecked(): void {
+    this.scroll.nativeElement.scrollTop =
+      this.scroll.nativeElement.scrollHeight;
   }
 }
