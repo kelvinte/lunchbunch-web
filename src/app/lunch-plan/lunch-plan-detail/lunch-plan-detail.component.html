@@ -9,19 +9,20 @@
     Go Back
   </button>
 </div>
-<div class="pt-10 flex flex-col justify-center z-0 max-h-screen pt-48" *ngIf="!error" #scrollMe
-  style="overflow-y: scroll; scrollbar-width: thin;">
-  <div>
+<div class="pt-10 flex-col justify-center z-0 " style="max-height: 50rem;" *ngIf="!error">
+  <div >
     <p class="text-3xl text-center font-extrabold text-gray-700">{{description}} </p>
     <p class="text-sm text-center">by: {{initiator}}</p>
     <p class="text-sm text-center">held on: {{date | date}}</p>
   </div>
-
+  <div  #scrollMe
+        style=" height: inherit; max-height:inherit; overflow-y: scroll; scrollbar-width: thin;">
   <div class="h-96 align-middle" *ngIf="!(suggestions &&  suggestions.length>0)">
     <p class="text-3xl text-center  ">No one has entered a suggestion yet</p>
   </div>
   <div class="items-center text-center w-full ">
     <app-suggestion *ngFor="let suggestion of suggestions" [suggestion]="suggestion"></app-suggestion>
+  </div>
   </div>
 </div>
 
