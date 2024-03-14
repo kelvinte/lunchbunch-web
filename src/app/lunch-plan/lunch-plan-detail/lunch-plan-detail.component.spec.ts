@@ -34,6 +34,7 @@ describe('LunchPlanDetailComponent', () => {
     true,
     null,
     null,
+    '2024-01-01',
   );
   let getLunchPlanSubject = new BehaviorSubject(plan);
 

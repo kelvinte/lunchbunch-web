@@ -1,10 +1,15 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { AppSettings } from '../app.settings';
 import { ApiResponse } from '../model/api-response.model';
 import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
 import { LunchPlan } from '../model/lunch-plan.model';
 import { SuggestionService } from './suggestion.service';
+import { PaginatedResponse } from '../model/paginated-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +20,7 @@ export class LunchPlanService {
     date: string;
     description: string;
   }>(null);
+
   constructor(
     private http: HttpClient,
     private suggestionService: SuggestionService,
@@ -53,6 +59,18 @@ export class LunchPlanService {
         tap((resp) => {
           const suggestions = resp.suggestions;
           this.suggestionService.setSuggestions(suggestions);
+        }),
+      );
+  }
+
+  getLunchPlanHistory(page, size) {
+    return this.http
+      .get<
+        ApiResponse<PaginatedResponse<LunchPlan[]>>
+      >(AppSettings.LUNCH_PLAN_ENDPOINT, { params: new HttpParams().set('page', page).set('size', size) })
+      .pipe(
+        map((resp) => {
+          return resp.data;
         }),
       );
   }

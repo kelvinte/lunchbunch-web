@@ -12,5 +12,7 @@ export class LunchPlan {
     public winner: SuggestionWinner,
 
     public suggestions: Suggestion[],
+
+    public createdAt: string,
   ) {}
 }

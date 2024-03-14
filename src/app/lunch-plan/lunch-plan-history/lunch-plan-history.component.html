@@ -1,0 +1,33 @@
+
+
+<div class="pt-10 flex-col justify-center z-0 " style="max-height: 50rem;">
+  <div >
+    <p class="text-3xl text-center font-extrabold text-gray-700">Your lunch plans</p>
+  </div>
+</div>
+
+<div *ngIf="lunchPlanHistory.length==0" class=" mx-auto justify-center items-center text-center  border m-2 p-2 sm:w-96 md:w-72 lg:w-96 xl:96">
+  <p>No Lunch plan yet!</p>
+</div>
+<div (click)="navigateToLunchPlan(lunchPlan.uuid)" class="border-gray-900 mx-auto justify-start items-center text-left  border m-2 p-2 sm:w-96 md:w-72 lg:w-96 xl:96" *ngFor="let lunchPlan of lunchPlanHistory">
+  <p class="text-2xl ">{{lunchPlan.description}}</p>
+  <p class="text-lg">Date: {{lunchPlan.date | date}}</p>
+  <p class="text-lg">Restaurant: {{lunchPlan.winner ? lunchPlan.winner.restaurant: '-' }}</p>
+  <p class="text-xs text-right pt-3">Date Planned: {{lunchPlan.createdAt|date:'short'}}</p>
+</div>
+
+<nav aria-label="Page navigation example" class=" items-center text-center mx-auto" *ngIf="totalPage>1">
+  <ul class="inline-flex -space-x-px text-sm">
+    <li>
+      <a (click)="getPreviousPage()" class=" cursor-pointer flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg  ">Previous</a>
+    </li>
+    <li *ngFor="let page of getTotalPage()">
+      <a (click)="setPage(page)"
+         [ngClass]="{'text-white bg-blue-600':page==currentPage}" class="cursor-pointer flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 ">{{page+1}}</a>
+    </li>
+    <li>
+      <a (click)="getNextPage()" class="cursor-pointer flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg ">Next</a>
+    </li>
+  </ul>
+</nav>
+

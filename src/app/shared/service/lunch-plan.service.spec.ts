@@ -80,6 +80,7 @@ describe('LunchPlanService', () => {
       true,
       null,
       null,
+      '2024-03-12',
     );
 
     service.getLunchPlan(uuid).subscribe((lunchPlan) => {

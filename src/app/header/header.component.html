@@ -10,6 +10,7 @@
       <div class="flex space-x-2">
         <button *ngIf="!isAuthenticated" routerLink="/auth" class="button-primary">Register</button>
         <button *ngIf="isAuthenticated" routerLink="/session/create" class="button-primary">Create Lunch Plan</button>
+        <button *ngIf="isAuthenticated" routerLink="/session/history" class="button-primary">View plan history</button>
         <button *ngIf="isAuthenticated" (click)="logout()" class="button-danger">Logout</button>
       </div>
     </div>
