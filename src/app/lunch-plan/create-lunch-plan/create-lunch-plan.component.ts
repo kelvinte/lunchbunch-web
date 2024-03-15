@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LunchPlanService } from '../../shared/service/lunch-plan.service';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
@@ -15,7 +15,7 @@ export class CreateLunchPlanComponent implements OnInit {
 
   constructor(
     private lunchPlanService: LunchPlanService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +33,7 @@ export class CreateLunchPlanComponent implements OnInit {
     this.lunchPlanService
       .createLunchPlan(
         this.createForm.value.date,
-        this.createForm.value.description,
+        this.createForm.value.description
       )
       .subscribe((data) => {
         this.router.navigate(['/session/create-success']);
