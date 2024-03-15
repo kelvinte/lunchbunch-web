@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,10 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './join-lunch-plan.component.css',
 })
 export class JoinLunchPlanComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
   goToSession(linkElement) {
     const link = linkElement.value;
     if (link == null || link == '') {

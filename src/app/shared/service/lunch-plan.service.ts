@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -23,7 +23,7 @@ export class LunchPlanService {
 
   constructor(
     private http: HttpClient,
-    private suggestionService: SuggestionService,
+    private suggestionService: SuggestionService
   ) {}
 
   createLunchPlan(date: string, description: string) {
@@ -40,11 +40,11 @@ export class LunchPlanService {
               uuid: string;
               date: string;
               description: string;
-            }>,
+            }>
           ) => {
             this.lunchPlanCreated.next(data.data);
-          },
-        ),
+          }
+        )
       );
   }
 
@@ -59,19 +59,20 @@ export class LunchPlanService {
         tap((resp) => {
           const suggestions = resp.suggestions;
           this.suggestionService.setSuggestions(suggestions);
-        }),
+        })
       );
   }
 
   getLunchPlanHistory(page, size) {
     return this.http
-      .get<
-        ApiResponse<PaginatedResponse<LunchPlan[]>>
-      >(AppSettings.LUNCH_PLAN_ENDPOINT, { params: new HttpParams().set('page', page).set('size', size) })
+      .get<ApiResponse<PaginatedResponse<LunchPlan[]>>>(
+        AppSettings.LUNCH_PLAN_ENDPOINT,
+        { params: new HttpParams().set('page', page).set('size', size) }
+      )
       .pipe(
         map((resp) => {
           return resp.data;
-        }),
+        })
       );
   }
 

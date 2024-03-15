@@ -10,7 +10,6 @@ import { Suggestion } from '../../shared/model/suggestion.model';
 import { ActivatedRoute } from '@angular/router';
 import { SuggestionService } from '../../shared/service/suggestion.service';
 import { LunchPlanService } from '../../shared/service/lunch-plan.service';
-import { ApiResponse } from '../../shared/model/api-response.model';
 import { SuggestionWinner } from '../../shared/model/suggestion-winner.model';
 import { Subscription } from 'rxjs';
 

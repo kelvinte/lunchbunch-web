@@ -1,11 +1,9 @@
 import {
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   Output,
   ViewChild,
-  input,
   OnInit,
   OnDestroy,
 } from '@angular/core';
@@ -35,7 +33,7 @@ export class SuggestionAddComponent implements OnInit, OnDestroy {
     this.errorSubscription = this.suggestionService.errorEmitter.subscribe(
       (error) => {
         this.error = error;
-      },
+      }
     );
   }
   ngOnDestroy() {

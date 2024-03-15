@@ -3,8 +3,6 @@ import {
   HttpHandler,
   HttpHeaders,
   HttpInterceptor,
-  HttpInterceptorFn,
-  HttpParams,
   HttpRequest,
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
@@ -16,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler,
+    next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return this.authService.user.pipe(
       take(1),
@@ -30,11 +28,11 @@ export class AuthInterceptor implements HttpInterceptor {
         const modifiedReq = req.clone({
           headers: new HttpHeaders().set(
             'Authorization',
-            'Bearer ' + user.accessToken,
+            'Bearer ' + user.accessToken
           ),
         });
         return next.handle(modifiedReq);
-      }),
+      })
     );
   }
 }

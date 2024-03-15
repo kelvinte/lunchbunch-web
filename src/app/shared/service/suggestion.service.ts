@@ -2,7 +2,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { AppSettings } from '../app.settings';
 import { AuthService } from './auth.service';
 import { BehaviorSubject, exhaustMap, take, throwError } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 import { WebsockModel } from '../model/websock.model';
 import { Suggestion } from '../model/suggestion.model';
 import { SuggestionWinner } from '../model/suggestion-winner.model';
@@ -24,7 +23,7 @@ export class SuggestionService {
 
   connect(lunchPlanUuid) {
     this.socket = new WebSocket(
-      AppSettings.LUNCH_PLAN_WS_ENDPOINT + '?suggest=' + lunchPlanUuid,
+      AppSettings.LUNCH_PLAN_WS_ENDPOINT + '?suggest=' + lunchPlanUuid
     );
 
     this.socket.onerror = (error) => {

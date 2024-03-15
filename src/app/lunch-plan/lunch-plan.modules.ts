@@ -8,7 +8,6 @@ import { CreateLunchPlanSuccessComponent } from './create-lunch-plan-success/cre
 import { SuggestionWinnerComponent } from './lunch-plan-detail/suggestion-winner/suggestion-winner.component';
 import { LunchPlanHistoryComponent } from './lunch-plan-history/lunch-plan-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { LunchPLanRoutingModule } from './lunch-plan-routing.module';
 import { SharedModule } from '../shared/shared.module';
 

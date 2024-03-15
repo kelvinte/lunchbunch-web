@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LunchPlanService } from '../../shared/service/lunch-plan.service';
 import { LunchPlan } from '../../shared/model/lunch-plan.model';
-import { PaginatedResponse } from '../../shared/model/paginated-response.model';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
@@ -18,7 +17,7 @@ export class LunchPlanHistoryComponent implements OnInit {
   constructor(
     private lunchPlanService: LunchPlanService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
     this.retrieve(this.currentPage, this.pageSize);
