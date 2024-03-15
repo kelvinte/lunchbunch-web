@@ -29,7 +29,6 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LunchPlanModule,
     SharedModule,
   ],
   providers: [
