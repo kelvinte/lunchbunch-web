@@ -24,33 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'session',
-    children: [
-      {
-        path: 'create',
-        component: CreateLunchPlanComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'create-success',
-        component: CreateLunchPlanSuccessComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'history',
-        component: LunchPlanHistoryComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'join',
-        component: JoinLunchPlanComponent,
-      },
-      {
-        path: ':uuid',
-        component: LunchPlanDetailComponent,
-      },
-    ],
+    loadChildren: () =>
+      import('./lunch-plan/lunch-plan.modules').then((m) => m.LunchPlanModule),
   },
-
   {
     path: 'not-found',
     component: ErrorComponent,

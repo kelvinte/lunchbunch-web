@@ -9,7 +9,7 @@ import { LunchPlanDetailComponent } from './lunch-plan-detail/lunch-plan-detail.
 
 const routes: Routes = [
   {
-    path: 'session',
+    path: '',
     children: [
       {
         path: 'create',
