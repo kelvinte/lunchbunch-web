@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthComponent } from './auth/auth.component';
@@ -30,7 +30,12 @@ const routes: Routes = [
   { path: '**', redirectTo: '/not-found' },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: false })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: false,
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
