@@ -8,7 +8,7 @@ import { CreateLunchPlanComponent } from './lunch-plan/create-lunch-plan/create-
 import { JoinLunchPlanComponent } from './lunch-plan/join-lunch-plan/join-lunch-plan.component';
 import { AuthComponent } from './auth/auth.component';
 import { CreateLunchPlanSuccessComponent } from './lunch-plan/create-lunch-plan-success/create-lunch-plan-success.component';
-import { authGuard } from './shared/guard/auth.guard';
+import { authGuard, canAccesAuthGuard } from './shared/guard/auth.guard';
 import { LunchPlanHistoryComponent } from './lunch-plan/lunch-plan-history/lunch-plan-history.component';
 
 const routes: Routes = [
@@ -20,6 +20,7 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent,
+    canActivate: [canAccesAuthGuard],
   },
   {
     path: 'session',

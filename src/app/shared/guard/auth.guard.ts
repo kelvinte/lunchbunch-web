@@ -13,6 +13,19 @@ export const authGuard: CanActivateFn = (route, state) => {
         return true;
       }
       return router.createUrlTree(['/']);
-    }),
+    })
+  );
+};
+
+export const canAccesAuthGuard: CanActivateFn = (route, state) => {
+  return inject(AuthService).user.pipe(
+    take(1),
+    map((user) => {
+      const isAuth = !!user;
+
+      if (!isAuth) {
+        return true;
+      }
+    })
   );
 };

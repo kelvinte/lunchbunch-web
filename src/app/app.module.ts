@@ -22,26 +22,17 @@ import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
 import { CreateLunchPlanSuccessComponent } from './lunch-plan/create-lunch-plan-success/create-lunch-plan-success.component';
 import { SuggestionWinnerComponent } from './lunch-plan/lunch-plan-detail/suggestion-winner/suggestion-winner.component';
 import { LunchPlanHistoryComponent } from './lunch-plan/lunch-plan-history/lunch-plan-history.component';
+import { LunchPlanModule } from './lunch-plan/lunch-plan.modules';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent,
     HeaderComponent,
-    LogoComponent,
-    SuggestionComponent,
-    SuggestionAddComponent,
     LandingComponent,
+    ErrorComponent,
     FooterComponent,
-    CreateLunchPlanComponent,
-    JoinLunchPlanComponent,
-    LunchPlanDetailComponent,
     AuthComponent,
-    ErrorAlertComponent,
-    SuccessAlertComponent,
-    CreateLunchPlanSuccessComponent,
-    SuggestionWinnerComponent,
-    LunchPlanHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +40,8 @@ import { LunchPlanHistoryComponent } from './lunch-plan/lunch-plan-history/lunch
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LunchPlanModule,
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
