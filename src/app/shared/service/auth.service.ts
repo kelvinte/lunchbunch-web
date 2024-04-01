@@ -63,10 +63,11 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    expirationDuration = expirationDuration - 30_000;
+    const now = new Date();
+    const duration = expirationDuration - 30_000 - now.getTime();
     this.autoLogoutTimeout = setTimeout(() => {
       this.logout();
-    }, expirationDuration);
+    }, duration);
   }
 
   autoLogin() {
